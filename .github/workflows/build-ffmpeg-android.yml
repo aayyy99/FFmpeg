@@ -1,0 +1,38 @@
+name: Build FFmpeg Android AAR
+
+on:
+  push:
+    branches:
+      - master # 触发工作流的分支
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # 运行环境
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up NDK
+        uses: android-actions/setup-ndk@v2
+        with:
+          ndk-version: '21.4.7075529' # 使用的 NDK 版本
+
+      - name: Build FFmpeg
+        run: |
+          # 在这里添加你的 FFmpeg 构建脚本
+          # 例如： ./build-android.sh
+          # 或者调用第三方的脚本。
+          # 确保脚本生成了 .so 文件
+
+      - name: Create AAR
+        run: |
+          # 在这里添加创建 AAR 文件的脚本
+          # 例如：使用 Gradle 或 Android Studio 创建 AAR
+          # 将 .so 文件和 Java 代码打包到 AAR 中
+
+      - name: Upload AAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: ffmpeg-android-aar
+          path: /path/to/your/output.aar # AAR 文件的路径
